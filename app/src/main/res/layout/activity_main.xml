@@ -1,53 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <RelativeLayout
-        android:id="@+id/relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:background="@drawable/custom_background">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/smiley_new" />
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_220sdp"
+            android:background="@drawable/custom_background">
+
+            <ImageView
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/smiley_new" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_50sdp"
+                android:text="Login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20sdp" />
+
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main_email_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relative_layout"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:cardElevation="@dimen/_10sdp">
+
+            <EditText
+                android:id="@+id/main_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/alef"
+                android:hint="Email Id"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_14sdp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main_password_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_email_card"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:cardElevation="@dimen/_10sdp">
+
+            <EditText
+                android:id="@+id/main_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/password"
+                android:drawablePadding="@dimen/_5sdp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_14sdp" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/main_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/main_password_card"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:text="Forgot Password?"
+            android:textSize="@dimen/_12sdp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_forgot_password"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:background="@drawable/custom_button"
             android:text="Login"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
+            android:textAllCaps="true"
+            android:textSize="@dimen/_18sdp"
+            app:backgroundTint="@null" />
     </RelativeLayout>
-
-    <EditText
-        android:inputType="textEmailAddress"
-        android:id="@+id/main_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relative_layout"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
-        android:hint="Email Id" />
-
-    <EditText
-        android:inputType="textPassword"
-        android:id="@+id/main_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/main_email"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="Password" />
-
-</RelativeLayout>
+</ScrollView>

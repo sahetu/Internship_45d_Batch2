@@ -4,6 +4,7 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">#F46020</item>
+        <item name="fontFamily">@font/alef</item>
     </style>
 
     <style name="Theme.Internship45dBatch2" parent="Base.Theme.Internship45dBatch2" />
