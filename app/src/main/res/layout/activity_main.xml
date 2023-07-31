@@ -23,15 +23,14 @@
                 android:src="@drawable/smiley_new" />
 
             <TextView
+                style="@style/text_20_white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_50sdp"
-                android:text="Login"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_20sdp" />
+                android:text="Login" />
 
         </RelativeLayout>
 
@@ -47,16 +46,15 @@
 
             <EditText
                 android:id="@+id/main_email"
+                style="@style/edit_18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:drawableLeft="@drawable/email"
                 android:drawablePadding="@dimen/_5sdp"
-                android:fontFamily="@font/alef"
                 android:hint="Email Id"
                 android:inputType="textEmailAddress"
-                android:padding="@dimen/_10sdp"
-                android:textSize="@dimen/_14sdp" />
+                android:padding="@dimen/_10sdp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -72,6 +70,7 @@
 
             <EditText
                 android:id="@+id/main_password"
+                style="@style/edit_18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -79,32 +78,29 @@
                 android:drawablePadding="@dimen/_5sdp"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:padding="@dimen/_10sdp"
-                android:textSize="@dimen/_14sdp" />
+                android:padding="@dimen/_10sdp" />
 
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/main_forgot_password"
+            style="@style/text_12_black1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/main_password_card"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginRight="@dimen/_20sdp"
-            android:text="Forgot Password?"
-            android:textSize="@dimen/_12sdp" />
+            android:text="Forgot Password?" />
 
         <Button
+            android:id="@+id/main_login"
+            style="@style/button_18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/main_forgot_password"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_40sdp"
-            android:background="@drawable/custom_button"
-            android:text="Login"
-            android:textAllCaps="true"
-            android:textSize="@dimen/_18sdp"
-            app:backgroundTint="@null" />
+            android:text="Login" />
     </RelativeLayout>
 </ScrollView>
