@@ -102,5 +102,16 @@
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_40sdp"
             android:text="Login" />
+
+        <Button
+            android:id="@+id/main_signup"
+            style="@style/button_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_login"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:text="Create An Account" />
+
     </RelativeLayout>
 </ScrollView>
