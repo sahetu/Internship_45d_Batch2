@@ -68,7 +68,6 @@
             app:cardElevation="@dimen/_10sdp">
 
             <EditText
-                android:maxLength="10"
                 android:id="@+id/signup_contact"
                 style="@style/edit_18"
                 android:layout_width="match_parent"
@@ -78,6 +77,7 @@
                 android:drawablePadding="@dimen/_5sdp"
                 android:hint="Contact No."
                 android:inputType="phone"
+                android:maxLength="10"
                 android:padding="@dimen/_10sdp" />
 
         </androidx.cardview.widget.CardView>
@@ -130,17 +130,51 @@
 
         </androidx.cardview.widget.CardView>
 
+        <RadioGroup
+            android:id="@+id/signup_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_confirm_password_card"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/signup_male"
+                style="@style/radio_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/signup_female"
+                style="@style/radio_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Female" />
+
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/signup_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_gender"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp" />
 
         <Button
             android:id="@+id/signup_signup"
             style="@style/button_18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/signup_confirm_password_card"
+            android:layout_below="@id/signup_city"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_40sdp"
             android:text="Signup" />
-        
+
         <Button
             android:id="@+id/signup_login"
             style="@style/button_18"
