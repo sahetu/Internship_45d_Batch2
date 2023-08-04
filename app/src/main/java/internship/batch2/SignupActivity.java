@@ -3,6 +3,8 @@ package internship.batch2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,11 +37,19 @@ public class SignupActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     Calendar calendar;
     String sCity = "";
+    String sGender;
+
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        db = openOrCreateDatabase("Internship_Batch2",MODE_PRIVATE,null);
+        String tabelQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,NAME VARCHAR(100),EMAIL VARCHAR(100),CONTACT INTEGER(10),PASSWORD VARCHAR(20),GENDER VARCHAR(6),CITY VARCHAR(50),DOB VARCHAR(10))";
+        db.execSQL(tabelQuery);
+
         login = findViewById(R.id.signup_login);
 
         name = findViewById(R.id.signup_name);
@@ -118,7 +128,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = findViewById(i); //i = R.id.signup_male,R.id.signup_female;
-                new CommonMethod(SignupActivity.this, radioButton.getText().toString());
+                sGender = radioButton.getText().toString();
+                new CommonMethod(SignupActivity.this, sGender);
             }
         });
 
@@ -182,11 +193,21 @@ public class SignupActivity extends AppCompatActivity {
                     dob.setError("Please Select Date Of Birth");
                 }
                 else {
-                    System.out.println("Signup Successfully\nEmail:" + email.getText().toString() + "\nPassword:" + password.getText().toString());
-                    new CommonMethod(SignupActivity.this, "Signup Successfully");
-                    new CommonMethod(view, "Signup Successfully");
-                    //new CommonMethod(SignupActivity.this, HomeActivity.class);
-                    onBackPressed();
+                    String selectQuery = "SELECT * FROM USERS WHERE EMAIL='"+email.getText().toString()+"' OR CONTACT='"+contact.getText().toString()+"'";
+                    Cursor cursor = db.rawQuery(selectQuery,null);
+                    if(cursor.getCount()>0){
+                        new CommonMethod(SignupActivity.this, "Email Id/Contact No. Already Exists");
+                    }
+                    else {
+                        String insertQuery = "INSERT INTO USERS VALUES(NULL,'" + name.getText().toString() + "','" + email.getText().toString() + "','" + contact.getText().toString() + "','" + password.getText().toString() + "','" + sGender + "','" + sCity + "','" + dob.getText().toString() + "')";
+                        db.execSQL(insertQuery);
+
+                        System.out.println("Signup Successfully\nEmail:" + email.getText().toString() + "\nPassword:" + password.getText().toString());
+                        new CommonMethod(SignupActivity.this, "Signup Successfully");
+                        new CommonMethod(view, "Signup Successfully");
+                        //new CommonMethod(SignupActivity.this, HomeActivity.class);
+                        onBackPressed();
+                    }
                 }
             }
         });
