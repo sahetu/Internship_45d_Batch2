@@ -3,6 +3,7 @@ package internship.batch2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -22,11 +23,14 @@ public class MainActivity extends AppCompatActivity {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     SQLiteDatabase db;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sp = getSharedPreferences(ConstantSp.PREF,MODE_PRIVATE);
 
         db = openOrCreateDatabase("Internship_Batch2",MODE_PRIVATE,null);
         String tabelQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,NAME VARCHAR(100),EMAIL VARCHAR(100),CONTACT INTEGER(10),PASSWORD VARCHAR(20),GENDER VARCHAR(6),CITY VARCHAR(50),DOB VARCHAR(10))";
@@ -81,6 +85,16 @@ public class MainActivity extends AppCompatActivity {
                             String sGender = cursor.getString(5);
                             String sCity = cursor.getString(6);
                             String sDob = cursor.getString(7);
+
+                            sp.edit().putString(ConstantSp.ID,sUserId).commit();
+                            sp.edit().putString(ConstantSp.NAME,sName).commit();
+                            sp.edit().putString(ConstantSp.EMAIL,sEmail).commit();
+                            sp.edit().putString(ConstantSp.CONTACT,sContact).commit();
+                            sp.edit().putString(ConstantSp.PASSWORD,sPassword).commit();
+                            sp.edit().putString(ConstantSp.GENDER,sGender).commit();
+                            sp.edit().putString(ConstantSp.CITY,sCity).commit();
+                            sp.edit().putString(ConstantSp.DOB,sDob).commit();
+
                             Log.d("RESPONSE_USER_DETAIL",sUserId+"\n"+sName+"\n"+sEmail+"\n"+sContact+"\n"+sPassword+"\n"+sGender+"\n"+sCity+"\n"+sDob);
                         }
 
@@ -100,5 +114,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        finishAffinity();
     }
 }
