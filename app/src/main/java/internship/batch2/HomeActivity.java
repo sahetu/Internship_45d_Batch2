@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
     //TextView name;
     SharedPreferences sp;
 
-    Button logout, updateProfile;
+    Button logout, updateProfile, editProfile;
     EditText name, email, contact, dob;
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -190,30 +190,62 @@ public class HomeActivity extends AppCompatActivity {
                     dob.setError("Please Select Date Of Birth");
                 }
                 else {
-                    /*String selectQuery = "SELECT * FROM USERS WHERE EMAIL='"+email.getText().toString()+"' OR CONTACT='"+contact.getText().toString()+"'";
+                    String selectQuery = "SELECT * FROM USERS WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"'";
                     Cursor cursor = db.rawQuery(selectQuery,null);
                     if(cursor.getCount()>0){
-                        new CommonMethod(HomeActivity.this, "Email Id/Contact No. Already Exists");
+                        String updateQuery = "UPDATE USERS SET NAME='"+name.getText().toString()+"',EMAIL='"+email.getText().toString()+"',CONTACT='"+contact.getText().toString()+"',GENDER='"+sGender+"',CITY='"+sCity+"',DOB='"+dob.getText().toString()+"' WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"'";
+                        db.execSQL(updateQuery);
+                        new CommonMethod(HomeActivity.this,"Profile Update Success");
+
+                        sp.edit().putString(ConstantSp.NAME,name.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.EMAIL,email.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.CONTACT,contact.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.GENDER,sGender).commit();
+                        sp.edit().putString(ConstantSp.CITY,sCity).commit();
+                        sp.edit().putString(ConstantSp.DOB,dob.getText().toString()).commit();
+
+                        setData(false);
                     }
                     else {
-                        String insertQuery = "INSERT INTO USERS VALUES(NULL,'" + name.getText().toString() + "','" + email.getText().toString() + "','" + contact.getText().toString() + "','" + password.getText().toString() + "','" + sGender + "','" + sCity + "','" + dob.getText().toString() + "')";
-                        db.execSQL(insertQuery);
-
-                        System.out.println("Signup Successfully\nEmail:" + email.getText().toString() + "\nPassword:" + password.getText().toString());
-                        new CommonMethod(HomeActivity.this, "Signup Successfully");
-                        new CommonMethod(view, "Signup Successfully");
-                        //new CommonMethod(HomeActivity.this, HomeActivity.class);
-                        onBackPressed();
-                    }*/
+                        new CommonMethod(HomeActivity.this,"Invalid User Id");
+                    }
                 }
             }
         });
 
-        setData();
+        editProfile = findViewById(R.id.home_edit_profile);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setData(true);
+            }
+        });
+
+        setData(false);
 
     }
 
-    private void setData() {
+    private void setData(boolean isEnable) {
+
+        name.setEnabled(isEnable);
+        email.setEnabled(isEnable);
+        contact.setEnabled(isEnable);
+        dob.setEnabled(isEnable);
+
+        male.setEnabled(isEnable);
+        female.setEnabled(isEnable);
+
+        city.setEnabled(isEnable);
+
+        if(isEnable){
+            editProfile.setVisibility(View.GONE);
+            updateProfile.setVisibility(View.VISIBLE);
+        }
+        else{
+            editProfile.setVisibility(View.VISIBLE);
+            updateProfile.setVisibility(View.GONE);
+        }
+
         name.setText(sp.getString(ConstantSp.NAME,""));
         email.setText(sp.getString(ConstantSp.EMAIL,""));
         contact.setText(sp.getString(ConstantSp.CONTACT,""));
