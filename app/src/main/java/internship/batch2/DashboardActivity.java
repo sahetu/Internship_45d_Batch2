@@ -1,6 +1,7 @@
 package internship.batch2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
@@ -27,13 +28,15 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
                 // your codes
-                if(item.getId()==HOME_MENU){
-                    mBottomNavigation.show(HOME_MENU,true);
-                }
-                else if(item.getId()==PROFILE_MENU){
-                    mBottomNavigation.show(PROFILE_MENU,true);
-                }
-                else{
+                if (item.getId() == HOME_MENU) {
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.dashboard_relative, new HomeFragment()).commit();
+                    mBottomNavigation.show(HOME_MENU, true);
+                } else if (item.getId() == PROFILE_MENU) {
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.dashboard_relative, new ProfileFragment()).commit();
+                    mBottomNavigation.show(PROFILE_MENU, true);
+                } else {
 
                 }
             }
@@ -53,7 +56,9 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        mBottomNavigation.show(HOME_MENU,true);
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.dashboard_relative, new HomeFragment()).commit();
+        mBottomNavigation.show(HOME_MENU, true);
 
     }
 }

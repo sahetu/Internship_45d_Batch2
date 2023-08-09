@@ -18,4 +18,10 @@
         app:mbn_selectedIconColor="#BD0000"
         app:mbn_shadowColor="#1f212121"/>
 
+    <RelativeLayout
+        android:id="@+id/dashboard_relative"
+        android:layout_above="@id/dashboard_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </RelativeLayout>
