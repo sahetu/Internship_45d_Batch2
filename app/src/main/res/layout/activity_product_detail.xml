@@ -40,4 +40,14 @@
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp" />
 
+    <Button
+        android:layout_marginTop="@dimen/_20sdp"
+        android:id="@+id/product_detail_buy_now"
+        android:text="Buy Now"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        style="@style/button_18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
 </LinearLayout>
