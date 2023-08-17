@@ -13,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
 
+    String[] idArray = {"1","2","3","4","5"};
     String[] nameArray = {"Bread","Butter","Cloth","Makeup Kit","Gift"};
     String[] priceArray = {"50","120","2000","4000","1000"};
     int[] imageArray = {R.drawable.bread,R.drawable.butter,R.drawable.cloth,R.drawable.makup_kit,R.drawable.upcoming_load};
@@ -29,6 +32,12 @@ public class HomeFragment extends Fragment {
             "Hold out your hands and close your eyes! I hope this small gift will make your birthday even more joyful and brighter!\n" +
                     "Best wishes! I have something special for you on this special day, and I hope you like it. Enjoy this gift!"
     };
+
+    RecyclerView categoryRecyclerview;
+    String[] categoryNameArray = {"Travel","Fashion","Beauty","Health","Food"};
+    int[] categoryImageArray = {R.drawable.travel,R.drawable.fashion,R.drawable.beauty,R.drawable.health,R.drawable.food_drink};
+
+    ArrayList<CategoryList> arrayList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -53,8 +62,23 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        ProductAdapter adapter = new ProductAdapter(getActivity(),nameArray,imageArray,priceArray,descArray);
+        ProductAdapter adapter = new ProductAdapter(getActivity(),nameArray,imageArray,priceArray,descArray,idArray);
         recyclerView.setAdapter(adapter);
+
+        categoryRecyclerview = view.findViewById(R.id.home_recyclerview_category);
+        categoryRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
+        categoryRecyclerview.setItemAnimator(new DefaultItemAnimator());
+
+        arrayList = new ArrayList<>();
+        for(int i=0;i<categoryNameArray.length;i++){
+            CategoryList list = new CategoryList();
+            list.setName(categoryNameArray[i]);
+            list.setImage(categoryImageArray[i]);
+            arrayList.add(list);
+        }
+
+        CategoryAdapter catAdapter = new CategoryAdapter(getActivity(),arrayList);
+        categoryRecyclerview.setAdapter(catAdapter);
 
         return view;
     }

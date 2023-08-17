@@ -12,6 +12,7 @@ public class ConstantSp {
     public static String CITY = "city";
     public static String DOB = "dob";
 
+    public static String PRODUCT_ID = "product_id";
     public static String PRODUCT_NAME = "product_name";
     public static String PRODUCT_IMAGE = "product_image";
 

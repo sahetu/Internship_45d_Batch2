@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,47 +7,70 @@
     android:orientation="vertical"
     tools:context=".ProductDetailActivity">
 
-    <ImageView
-        android:id="@+id/product_detail_image"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:layout_margin="@dimen/_10sdp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/product_detail_name"
-        style="@style/text_20_white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:textColor="@color/black" />
+        <ImageView
+            android:id="@+id/product_detail_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_margin="@dimen/_10sdp" />
 
-    <TextView
-        android:id="@+id/product_detail_price"
-        style="@style/text_20_white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/product_detail_name"
+            style="@style/text_20_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/black" />
 
-    <TextView
-        android:justificationMode="inter_word"
-        android:id="@+id/product_detail_desc"
-        style="@style/text_12_black1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp" />
+        <TextView
+            android:id="@+id/product_detail_price"
+            style="@style/text_20_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/black" />
 
-    <Button
-        android:layout_marginTop="@dimen/_20sdp"
-        android:id="@+id/product_detail_buy_now"
-        android:text="Buy Now"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_18"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/product_detail_desc"
+            style="@style/text_12_black1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:justificationMode="inter_word" />
 
+        <Button
+            android:id="@+id/product_detail_add_wishlist"
+            style="@style/button_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Add To Wishlist" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/product_detail_add_cart"
+            style="@style/button_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Add To Cart" />
+
+        <Button
+            android:id="@+id/product_detail_buy_now"
+            style="@style/button_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Buy Now" />
+
+    </LinearLayout>
+</ScrollView>
