@@ -55,6 +55,15 @@
             android:text="Add To Wishlist" />
 
         <Button
+            android:id="@+id/product_detail_remove_wishlist"
+            style="@style/button_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Remove From Wishlist" />
+
+        <Button
             android:id="@+id/product_detail_add_cart"
             style="@style/button_18"
             android:layout_width="match_parent"

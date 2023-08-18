@@ -24,7 +24,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
 
     ImageView imageView;
     TextView name, price, desc;
-    Button buyNow,addCart,addWishlist;
+    Button buyNow, addCart, addWishlist, removeWishlist;
 
     SharedPreferences sp;
 
@@ -35,7 +35,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-        db = openOrCreateDatabase("Internship_Batch2",MODE_PRIVATE,null);
+        db = openOrCreateDatabase("Internship_Batch2", MODE_PRIVATE, null);
         String tabelQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,NAME VARCHAR(100),EMAIL VARCHAR(100),CONTACT INTEGER(10),PASSWORD VARCHAR(20),GENDER VARCHAR(6),CITY VARCHAR(50),DOB VARCHAR(10))";
         db.execSQL(tabelQuery);
 
@@ -59,35 +59,59 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String selectQuery = "SELECT * FROM CART WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"' AND PRODUCTID='"+sp.getString(ConstantSp.PRODUCT_ID,"")+"' AND ORDERID='0' ";
-                Cursor cursor = db.rawQuery(selectQuery,null);
-                if(cursor.getCount()>0){
-                    new CommonMethod(ProductDetailActivity.this,"Product Already Added In Cart");
-                }
-                else{
+                String selectQuery = "SELECT * FROM CART WHERE USERID='" + sp.getString(ConstantSp.ID, "") + "' AND PRODUCTID='" + sp.getString(ConstantSp.PRODUCT_ID, "") + "' AND ORDERID='0' ";
+                Cursor cursor = db.rawQuery(selectQuery, null);
+                if (cursor.getCount() > 0) {
+                    new CommonMethod(ProductDetailActivity.this, "Product Already Added In Cart");
+                } else {
                     int iQty = 3;
-                    int iTotalPrice = Integer.parseInt(sp.getString(ConstantSp.PRODUCT_PRICE,""))*iQty;
-                    String insertQuery = "INSERT INTO CART VALUES(NULL,'0','"+sp.getString(ConstantSp.ID,"")+"','"+sp.getString(ConstantSp.PRODUCT_ID,"")+"','"+sp.getString(ConstantSp.PRODUCT_NAME,"")+"','"+sp.getString(ConstantSp.PRODUCT_PRICE,"")+"','"+sp.getInt(ConstantSp.PRODUCT_IMAGE,0)+"','"+sp.getString(ConstantSp.PRODUCT_DESCRIPTION,"")+"','"+iQty+"','"+iTotalPrice+"')";
+                    int iTotalPrice = Integer.parseInt(sp.getString(ConstantSp.PRODUCT_PRICE, "")) * iQty;
+                    String insertQuery = "INSERT INTO CART VALUES(NULL,'0','" + sp.getString(ConstantSp.ID, "") + "','" + sp.getString(ConstantSp.PRODUCT_ID, "") + "','" + sp.getString(ConstantSp.PRODUCT_NAME, "") + "','" + sp.getString(ConstantSp.PRODUCT_PRICE, "") + "','" + sp.getInt(ConstantSp.PRODUCT_IMAGE, 0) + "','" + sp.getString(ConstantSp.PRODUCT_DESCRIPTION, "") + "','" + iQty + "','" + iTotalPrice + "')";
                     db.execSQL(insertQuery);
-                    new CommonMethod(ProductDetailActivity.this,"Product Added In Cart Successfully");
+                    new CommonMethod(ProductDetailActivity.this, "Product Added In Cart Successfully");
                 }
             }
         });
 
         addWishlist = findViewById(R.id.product_detail_add_wishlist);
+        removeWishlist = findViewById(R.id.product_detail_remove_wishlist);
+
+        String selectQuery = "SELECT * FROM WISHLIST WHERE USERID='" + sp.getString(ConstantSp.ID, "") + "' AND PRODUCTID='" + sp.getString(ConstantSp.PRODUCT_ID, "") + "'";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.getCount() > 0) {
+            addWishlist.setVisibility(View.GONE);
+            removeWishlist.setVisibility(View.VISIBLE);
+        } else {
+            addWishlist.setVisibility(View.VISIBLE);
+            removeWishlist.setVisibility(View.GONE);
+        }
+
+        removeWishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String removeQuery = "DELETE FROM WISHLIST WHERE PRODUCTID='"+sp.getString(ConstantSp.PRODUCT_ID,"")+"' AND USERID='"+sp.getString(ConstantSp.ID,"")+"'";
+                db.execSQL(removeQuery);
+                new CommonMethod(ProductDetailActivity.this,"Product Removed From Wishlist Successfully");
+                addWishlist.setVisibility(View.VISIBLE);
+                removeWishlist.setVisibility(View.GONE);
+            }
+        });
 
         addWishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String selectQuery = "SELECT * FROM WISHLIST WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"' AND PRODUCTID='"+sp.getString(ConstantSp.PRODUCT_ID,"")+"'";
-                Cursor cursor = db.rawQuery(selectQuery,null);
-                if(cursor.getCount()>0){
-                    new CommonMethod(ProductDetailActivity.this,"Product Already Added In Wishlist");
-                }
-                else{
-                    String insertQuery = "INSERT INTO WISHLIST VALUES(NULL,'"+sp.getString(ConstantSp.ID,"")+"','"+sp.getString(ConstantSp.PRODUCT_ID,"")+"','"+sp.getString(ConstantSp.PRODUCT_NAME,"")+"','"+sp.getString(ConstantSp.PRODUCT_PRICE,"")+"','"+sp.getInt(ConstantSp.PRODUCT_IMAGE,0)+"','"+sp.getString(ConstantSp.PRODUCT_DESCRIPTION,"")+"')";
+                String selectQuery = "SELECT * FROM WISHLIST WHERE USERID='" + sp.getString(ConstantSp.ID, "") + "' AND PRODUCTID='" + sp.getString(ConstantSp.PRODUCT_ID, "") + "'";
+                Cursor cursor = db.rawQuery(selectQuery, null);
+                if (cursor.getCount() > 0) {
+                    new CommonMethod(ProductDetailActivity.this, "Product Already Added In Wishlist");
+                } else {
+                    String insertQuery = "INSERT INTO WISHLIST VALUES(NULL,'" + sp.getString(ConstantSp.ID, "") + "','" + sp.getString(ConstantSp.PRODUCT_ID, "") + "','" + sp.getString(ConstantSp.PRODUCT_NAME, "") + "','" + sp.getString(ConstantSp.PRODUCT_PRICE, "") + "','" + sp.getInt(ConstantSp.PRODUCT_IMAGE, 0) + "','" + sp.getString(ConstantSp.PRODUCT_DESCRIPTION, "") + "')";
                     db.execSQL(insertQuery);
-                    new CommonMethod(ProductDetailActivity.this,"Product Added In Wishlist Successfully");
+                    new CommonMethod(ProductDetailActivity.this, "Product Added In Wishlist Successfully");
+
+                    addWishlist.setVisibility(View.GONE);
+                    removeWishlist.setVisibility(View.VISIBLE);
+
                 }
             }
         });
@@ -125,11 +149,11 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://seeklogo.com/images/S/smiley-face-logo-C3882DDA04-seeklogo.com.png");
             options.put("currency", "INR");
-            options.put("amount", Integer.parseInt(sp.getString(ConstantSp.PRODUCT_PRICE, ""))*100);
+            options.put("amount", Integer.parseInt(sp.getString(ConstantSp.PRODUCT_PRICE, "")) * 100);
 
             JSONObject preFill = new JSONObject();
-            preFill.put("email", sp.getString(ConstantSp.EMAIL,""));
-            preFill.put("contact", sp.getString(ConstantSp.CONTACT,""));
+            preFill.put("email", sp.getString(ConstantSp.EMAIL, ""));
+            preFill.put("contact", sp.getString(ConstantSp.CONTACT, ""));
 
             options.put("prefill", preFill);
 
@@ -146,7 +170,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
     public void onPaymentSuccess(String s, PaymentData paymentData) {
         try {
             Toast.makeText(this, "Payment Successful :\nPayment ID: " + s + "\nPayment Data: " + paymentData.getData(), Toast.LENGTH_SHORT).show();
-            Log.d("RESPONSE_SUCCESS","Payment Successful :\nPayment ID: " + s + "\nPayment Data: " + paymentData.getData());
+            Log.d("RESPONSE_SUCCESS", "Payment Successful :\nPayment ID: " + s + "\nPayment Data: " + paymentData.getData());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -156,7 +180,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
     public void onPaymentError(int i, String s, PaymentData paymentData) {
         try {
             Toast.makeText(this, "Payment Failed:\nPayment Data: " + paymentData.getData(), Toast.LENGTH_SHORT).show();
-            Log.d("RESPONSE_ERROR","Payment Failed:\nPayment Data: " + paymentData.getData());
+            Log.d("RESPONSE_ERROR", "Payment Failed:\nPayment Data: " + paymentData.getData());
         } catch (Exception e) {
             e.printStackTrace();
         }
