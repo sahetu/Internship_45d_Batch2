@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +16,14 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     Button login,signup;
-    EditText email, password;
+    EditText email;
+    //password
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         login = findViewById(R.id.main_login);
         email = findViewById(R.id.main_email);
-        password = findViewById(R.id.main_password);
+        //password = findViewById(R.id.main_password);
 
         signup = findViewById(R.id.main_signup);
 
@@ -55,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (email.getText().toString().trim().equals("")) {
-                    email.setError("Email Id Required");
+                    email.setError("Contact No. Required");
                     /*if(email.getText().toString().trim().matches(emailPattern)){
                         System.out.println("Email Pattern Match");
                     }
@@ -63,18 +68,27 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println("Email Pattern Not Match");
                     }*/
                 }
-                else if(!email.getText().toString().trim().matches(emailPattern)){
+                else if(email.getText().toString().length()<10){
+                    email.setError("Valid Contact No. Required");
+                }
+                /*else if(!email.getText().toString().trim().matches(emailPattern)){
                     email.setError("Invalid EMail Id");
                 }else if (password.getText().toString().trim().equals("")) {
                     password.setError("Password Required");
                 }
                 else if (password.getText().toString().trim().length()<6) {
                     password.setError("Min. 6 Char Password Required");
-                }else {
+                }*/
+                else {
 
-                    String selectQuery = "SELECT * FROM USERS WHERE EMAIL='"+email.getText().toString()+"' AND PASSWORD='"+password.getText().toString()+"'";
+                    //String selectQuery = "SELECT * FROM USERS WHERE EMAIL='"+email.getText().toString()+"' AND PASSWORD='"+password.getText().toString()+"'";
+                    String selectQuery = "SELECT * FROM USERS WHERE CONTACT='"+email.getText().toString()+"'";
                     Cursor cursor = db.rawQuery(selectQuery,null);
                     if(cursor.getCount()>0) {
+                        String sOTP = getRandomNumberString();
+                        SmsManager smsManager = SmsManager.getDefault();
+                        ArrayList<String> parts = smsManager.divideMessage("Your OTP Code IS : " + sOTP);
+                        smsManager.sendMultipartTextMessage(email.getText().toString(), null, parts, null, null);
 
                         while (cursor.moveToNext()){
                             String sUserId = cursor.getString(0);
@@ -94,26 +108,38 @@ public class MainActivity extends AppCompatActivity {
                             sp.edit().putString(ConstantSp.GENDER,sGender).commit();
                             sp.edit().putString(ConstantSp.CITY,sCity).commit();
                             sp.edit().putString(ConstantSp.DOB,sDob).commit();
+                            sp.edit().putBoolean(ConstantSp.IS_OTP_VERIFY,false).commit();
+                            sp.edit().putString(ConstantSp.OTP,sOTP).commit();
 
                             Log.d("RESPONSE_USER_DETAIL",sUserId+"\n"+sName+"\n"+sEmail+"\n"+sContact+"\n"+sPassword+"\n"+sGender+"\n"+sCity+"\n"+sDob);
                         }
 
-                        System.out.println("Login Successfully\nEmail:" + email.getText().toString() + "\nPassword:" + password.getText().toString());
+                        //System.out.println("Login Successfully\nEmail:" + email.getText().toString() + "\nPassword:" + password.getText().toString());
                         //Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
-                        new CommonMethod(MainActivity.this, "Login Successfully");
+                        new CommonMethod(MainActivity.this, "Sms Send Successfully");
                         //Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_SHORT).show();
-                        new CommonMethod(view, "Login Successfully");
+                        new CommonMethod(view, "Sms Send Successfully");
 
                         /*Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                         startActivity(intent);*/
-                        new CommonMethod(MainActivity.this, DashboardActivity.class);
+                        new CommonMethod(MainActivity.this, LoginOtpActivity.class);
                     }
                     else{
-                        new CommonMethod(MainActivity.this, "Login Unsuccessfully");
+                        new CommonMethod(MainActivity.this, "Invalid Contact no.");
                     }
                 }
             }
         });
+    }
+
+    public static String getRandomNumberString() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
     }
 
     @Override

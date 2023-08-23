@@ -35,10 +35,20 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(sp.getString(ConstantSp.ID,"").equalsIgnoreCase("")) {
-                    new CommonMethod(SplashActivity.this, MainActivity.class);
+                    if(sp.getBoolean(ConstantSp.IS_OTP_VERIFY,false)==true) {
+                        new CommonMethod(SplashActivity.this, DashboardActivity.class);
+                    }
+                    else{
+                        new CommonMethod(SplashActivity.this, MainActivity.class);
+                    }
                 }
                 else{
-                    new CommonMethod(SplashActivity.this, DashboardActivity.class);
+                    if(sp.getBoolean(ConstantSp.IS_OTP_VERIFY,false)==true) {
+                        new CommonMethod(SplashActivity.this, DashboardActivity.class);
+                    }
+                    else{
+                        new CommonMethod(SplashActivity.this, MainActivity.class);
+                    }
                 }
             }
         },2000);

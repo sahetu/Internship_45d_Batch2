@@ -21,4 +21,7 @@ public class ConstantSp {
 
     public static String PRICE_SYMBOL = "₹";
 
+    public static String OTP = "otp";
+    public static String IS_OTP_VERIFY = "is_otp_verify";
+
 }

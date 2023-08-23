@@ -30,12 +30,12 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_50sdp"
-                android:text="Login" />
+                android:text="Login OTP" />
 
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/main_email_card"
+            android:id="@+id/login_otp_edit_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/relative_layout"
@@ -45,74 +45,29 @@
             app:cardElevation="@dimen/_10sdp">
 
             <EditText
-                android:id="@+id/main_email"
+                android:id="@+id/login_otp_edit"
                 style="@style/edit_18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:drawableLeft="@drawable/email"
                 android:drawablePadding="@dimen/_5sdp"
-                android:hint="Contact No"
-                android:maxLength="10"
+                android:hint="OTP"
+                android:maxLength="6"
                 android:inputType="phone"
                 android:padding="@dimen/_10sdp" />
 
         </androidx.cardview.widget.CardView>
 
-        <!--<androidx.cardview.widget.CardView
-            android:id="@+id/main_password_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/main_email_card"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            app:cardCornerRadius="@dimen/_50sdp"
-            app:cardElevation="@dimen/_10sdp">
-
-            <EditText
-                android:id="@+id/main_password"
-                style="@style/edit_18"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:drawableLeft="@drawable/password"
-                android:drawablePadding="@dimen/_5sdp"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:padding="@dimen/_10sdp" />
-
-        </androidx.cardview.widget.CardView>-->
-
-        <TextView
-            android:id="@+id/main_forgot_password"
-            style="@style/text_12_black1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/main_email_card"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:text="Forgot Password?" />
-
         <Button
-            android:id="@+id/main_login"
+            android:id="@+id/login_otp_submit"
             style="@style/button_18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/main_forgot_password"
+            android:layout_below="@id/login_otp_edit_card"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_40sdp"
-            android:text="Login" />
-
-        <Button
-            android:id="@+id/main_signup"
-            style="@style/button_18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/main_login"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:text="Create An Account" />
+            android:text="Submit" />
 
     </RelativeLayout>
 </ScrollView>
