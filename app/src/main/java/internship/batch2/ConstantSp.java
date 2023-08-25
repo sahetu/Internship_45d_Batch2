@@ -24,4 +24,6 @@ public class ConstantSp {
     public static String OTP = "otp";
     public static String IS_OTP_VERIFY = "is_otp_verify";
 
+    public static String FCM_ID = "fcm_id";
+    public static String PUSH_NOTIFICATION = "push_notification";
 }

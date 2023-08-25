@@ -34,7 +34,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(sp.getString(ConstantSp.ID,"").equalsIgnoreCase("")) {
+                new CommonMethod(SplashActivity.this, DashboardActivity.class);
+                /*if(sp.getString(ConstantSp.ID,"").equalsIgnoreCase("")) {
                     if(sp.getBoolean(ConstantSp.IS_OTP_VERIFY,false)==true) {
                         new CommonMethod(SplashActivity.this, DashboardActivity.class);
                     }
@@ -49,7 +50,7 @@ public class SplashActivity extends AppCompatActivity {
                     else{
                         new CommonMethod(SplashActivity.this, MainActivity.class);
                     }
-                }
+                }*/
             }
         },2000);
 

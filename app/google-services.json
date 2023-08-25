@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "194951520866",
+    "project_id": "internship-45d-batch2",
+    "storage_bucket": "internship-45d-batch2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194951520866:android:5648389443cf47e0b8e73b",
+        "android_client_info": {
+          "package_name": "internship.batch2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194951520866-8qgs7svbp8l4tac5eaj0ik54ssdqqrbs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "internship.batch2",
+            "certificate_hash": "fbc41ee024122e86af41da31bc19b4e2700195a1"
+          }
+        },
+        {
+          "client_id": "194951520866-tkva8m3cvgn4tu5ddisms8ldftk60de8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbGzw69BH2tQvtaGWJLz68zo-vSfyxhmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194951520866-tkva8m3cvgn4tu5ddisms8ldftk60de8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
